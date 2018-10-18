@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 
 import { getCards, getTries, getBest } from '../store/reducer';
-import { FlipCard } from '../store/actions';
+import { FlipCard, RestartGame } from '../store/actions';
 
 @Component({
   selector: 'app-game-page',
@@ -17,6 +17,10 @@ export class GamePageComponent implements OnInit {
   constructor(private store: Store<any>) {}
 
   ngOnInit() {}
+
+  onRestart() {
+    this.store.dispatch(new RestartGame());
+  }
 
   onClick(index) {
     this.store.dispatch(new FlipCard({ index }));

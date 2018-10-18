@@ -103,3 +103,7 @@ export const getImages = createSelector(gameState, state => state.images);
 export const getCards = createSelector(gameState, state => state.cards);
 export const getTries = createSelector(gameState, state => state.currentTries);
 export const getBest = createSelector(gameState, state => state.best);
+export const getDeckSize = createSelector(
+  gameState,
+  state => state.cards.length / 2
+);

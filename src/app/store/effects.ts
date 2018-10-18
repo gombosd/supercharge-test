@@ -12,6 +12,7 @@ import {
 } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 import { Router } from '@angular/router';
+import { shuffle } from 'lodash';
 
 import {
   GameActions,
@@ -23,8 +24,9 @@ import {
   FlipBackCards,
   FinishGame,
   SetTriesCounter,
+  RestartGame,
 } from './actions';
-import { getImages, getCards, getTries } from './reducer';
+import { getImages, getCards, getTries, getDeckSize } from './reducer';
 
 export interface Card {
   imageUrl: string;
@@ -52,7 +54,7 @@ export class GameEffects {
         found: false,
         flipped: false,
       }));
-      return new SetCards({ cards: [...cards, ...cards] });
+      return new SetCards({ cards: shuffle([...cards, ...cards]) });
     }),
     tap(() => this.router.navigate(['/game']))
   );
@@ -102,6 +104,13 @@ export class GameEffects {
   navigateOnFinish$ = this.actions$.pipe(
     ofType<FinishGame>(GameActions.FINISH_GAME),
     tap(() => this.router.navigate(['']))
+  );
+
+  @Effect()
+  restart$ = this.actions$.pipe(
+    ofType<RestartGame>(GameActions.RESTART),
+    withLatestFrom(this.store.pipe(select(getDeckSize))),
+    map(([_, deckSize]) => new CreateDeck({ deckSize }))
   );
 
   constructor(

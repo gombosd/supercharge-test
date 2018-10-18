@@ -52,6 +52,11 @@ export class SetTriesCounter {
   constructor() {}
 }
 
+export class RestartGame {
+  readonly type = GameActions.RESTART;
+  constructor() {}
+}
+
 export type GameAction =
   | StartGame
   | CreateDeck
@@ -60,4 +65,5 @@ export type GameAction =
   | CompleteCards
   | FlipBackCards
   | FinishGame
-  | SetTriesCounter;
+  | SetTriesCounter
+  | RestartGame;
