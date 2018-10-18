@@ -11,7 +11,7 @@ export interface ICardMatch {
 
 const LATEST_STATE = 'latest-state';
 
-const localState =
+const getLocalState = () =>
   localStorage && JSON.parse(localStorage.getItem(LATEST_STATE));
 
 const initialState = {
@@ -44,13 +44,19 @@ const clearLocalStorage = () => {
 };
 
 export function cardMatchReducer(
-  state: ICardMatch = localState || initialState,
+  state: ICardMatch = getLocalState() || initialState,
   action: GameAction
 ) {
   switch (action.type) {
     case GameActions.SET_CARDS: {
       const cards = action.payload.cards;
-      return { ...initialState, cards };
+      const localState = getLocalState();
+      return {
+        ...initialState,
+        cards,
+        tries: 0,
+        best: (localState && localState.best) || 0,
+      };
     }
     case GameActions.FLIP_CARD: {
       const index = action.payload.index;
@@ -79,10 +85,11 @@ export function cardMatchReducer(
     }
     case GameActions.FINISH_GAME: {
       const newBest =
-        action.payload.tries > state.best ? state.best : action.payload.tries;
-      const newState = { ...state, best: newBest };
+        action.payload.tries > state.best && state.best > 0
+          ? state.best
+          : action.payload.tries;
+      const newState = { ...state, best: newBest + 1 };
       setLocalStorage(newState);
-      console.log('*********', newState);
       return newState;
     }
     default:
