@@ -1,0 +1,25 @@
+.card-image {
+  width: 100%;
+}
+
+.card {
+  min-height: 100px;
+}
+
+.header {
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.best {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.best-counter {
+  font-size: 25px;
+}

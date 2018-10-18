@@ -1,0 +1,14 @@
+.all {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  align-self: flex-start;
+  align-content: flex-start;
+}
+
+.f {
+  flex: 1;
+}

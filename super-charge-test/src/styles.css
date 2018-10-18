@@ -1,0 +1,6 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  background-image: url(/assets/images/supercharge-logo.svg);
+  background-size: cover;
+  background-color: rgb(242, 242, 242) !important;
+}

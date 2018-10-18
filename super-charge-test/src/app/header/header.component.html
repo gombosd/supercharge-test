@@ -1,0 +1,18 @@
+<nav class="navbar navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">
+    <img [src]="superchargeIcon" width="30" height="30" alt="">
+    MEMORY GAME
+  </a>
+  <div class="header-start">
+    <form [formGroup]="deckSizeForm" (ngSubmit)="startGame(deckSizeForm)" class="deck-size-input-box form-inline" *ngIf="hasSearchBar">
+      <div class="deck-size-title">Deck size:</div>
+      <select class="deck-size-input form-control" formControlName="size">
+        <option *ngFor="let stackSize of stackSizes" [value]="stackSize">{{ stackSize }}</option>
+      </select>
+      <div class="start">
+        <button type="submit" class="start-button btn btn-danger">START
+          NEW GAME</button>
+      </div>
+    </form>
+  </div>
+</nav>

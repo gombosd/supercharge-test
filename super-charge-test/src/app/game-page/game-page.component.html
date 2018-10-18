@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="header">
+    <div class="tries">Current tries: {{ tries$ | async }}</div>
+    <div class="best">
+      <div class="best-title">Best:</div>
+      <div class="best-counter">{{ best$ | async }}</div>
+    </div>
+    <button class="btn btn-outline-dark">RESTART</button>
+  </div>
+  <div class="cards row">
+    <div class="p-3 col-6 col-sm-3 col-md-2" *ngFor="let card of cards$ | async; let i = index">
+      <div class="card p-3" (click)="onClick(i)" [hidden]="card.found">
+        <img [hidden]="!card.flipped" class="card-image" [src]="card.imageUrl" alt="card img">
+      </div>
+    </div>
+  </div>
+</div>

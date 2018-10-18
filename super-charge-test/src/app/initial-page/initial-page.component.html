@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="title">SUPERCHARGE</div>
+  <div class="sub-title">MEMORY GAME</div>
+  <div class="deck-size-box">
+    <div class="deck-size-title">Deck size:</div>
+    <form [formGroup]="deckSizeForm" (ngSubmit)="startGame(deckSizeForm)" class="deck-size-input-box">
+      <select class="deck-size-input form-control" formControlName="size">
+        <option *ngFor="let stackSize of stackSizes" [value]="stackSize">{{ stackSize }}</option>
+      </select>
+      <div class="start">
+        <button type="submit" class="start-button btn btn-danger">START
+          NEW GAME</button>
+      </div>
+    </form>
+  </div>
+</div>
